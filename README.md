@@ -1,0 +1,2 @@
+# ThreadSafeQueue
+Потокобезопасная очередь элементов ThreadSafeQueue
