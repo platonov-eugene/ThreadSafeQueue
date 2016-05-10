@@ -7,5 +7,16 @@
         mc:Ignorable="d" Title="Потокобезопасная очередь элементов ThreadSafeQueue" WindowStartupLocation="CenterScreen" WindowState="Maximized" Icon="Images/Logotype.png"
         Background="#FF447784" MinWidth="900" MinHeight="700" Width="900" Height="700" >
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.5*" />
+            <RowDefinition Height="0.5*" />
+            <RowDefinition Height="0.5*" />
+            <RowDefinition Height="0.5*" />
+            <RowDefinition Height="4*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="3*" />
+        </Grid.RowDefinitions>
     </Grid>
 </Window>
