@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ThreadSafeQueue.UI</name>
+    </assembly>
+    <members>
+        <member name="T:ThreadSafeQueue.UI.App">
+            <summary>
+            Класс приложения Windows Presentation Foundation
+            </summary>
+            <summary>
+            App
+            </summary>
+        </member>
+        <member name="M:ThreadSafeQueue.UI.App.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="M:ThreadSafeQueue.UI.App.Main">
+            <summary>
+            Application Entry Point.
+            </summary>
+        </member>
+        <member name="T:ThreadSafeQueue.UI.MainWindow">
+            <summary>
+            Форма приложения
+            </summary>
+            <summary>
+            MainWindow
+            </summary>
+        </member>
+        <member name="M:ThreadSafeQueue.UI.MainWindow.#ctor">
+            <summary>
+            Конструктор по умолчанию формы приложения
+            </summary>
+        </member>
+        <member name="M:ThreadSafeQueue.UI.MainWindow.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:ThreadSafeQueue.UI.Properties.Resources">
+            <summary>
+              Класс ресурсов со строгим типом для поиска локализованных строк и пр.
+            </summary>
+        </member>
+        <member name="P:ThreadSafeQueue.UI.Properties.Resources.ResourceManager">
+            <summary>
+              Возврат кэшированного экземпляра ResourceManager, используемого этим классом.
+            </summary>
+        </member>
+        <member name="P:ThreadSafeQueue.UI.Properties.Resources.Culture">
+            <summary>
+              Переопределяет свойство CurrentUICulture текущего потока для всех
+              подстановки ресурсов с помощью этого класса ресурсов со строгим типом.
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -3,3 +3,5 @@
 ################################################################################
 
 /ThreadSafeQueue/.vs/ThreadSafeQueue/v14
+/ThreadSafeQueue/ThreadSafeQueue.Logic/obj/Debug
+/ThreadSafeQueue/ThreadSafeQueue.UI/obj/Debug
