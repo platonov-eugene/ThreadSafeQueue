@@ -1,7 +1,7 @@
 # ThreadSafeQueue <img src="https://raw.githubusercontent.com/platonov-eugene/ThreadSafeQueue/master/ThreadSafeQueue/ThreadSafeQueue.UI/Images/Logotype.png" width="128" height="128" align="right" />
-Потокобезопасная очередь элементов ThreadSafeQueue (FIFO) с операциями:
+Потокобезопасная очередь элементов ThreadSafeQueue (FIFO) со следующими операциями:
 - `void Push(T)` - добавляет элемент типа T в конец коллекции ThreadSafeQueue;
-- `T Pop()` - удаляет и возвращает элемент типа T, находящийся в начале коллекции ThreadSafeQueue. В случае, отсутствия элементов типа T в коллекции ThreadSafeQueue, данная операция осуществляет ожидание добавления элемента типа T в коллекцию ThreadSafeQueue.
+- `T Pop()` - удаляет и возвращает элемент типа T, находящийся в начале коллекции ThreadSafeQueue. В случае, отсутствия элементов типа T в коллекции ThreadSafeQueue, осуществляет ожидание добавления элемента типа T в коллекцию ThreadSafeQueue.
 
 ##### Системные требования:
 1. Microsoft Visual Studio 2015;
