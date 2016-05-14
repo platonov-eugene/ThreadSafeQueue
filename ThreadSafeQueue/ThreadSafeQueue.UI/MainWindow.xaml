@@ -37,13 +37,13 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-                <Label Content="Поток A:" FontSize="14" FontWeight="DemiBold" VerticalAlignment="Center" />
+                <Label Name="labelHeaderThreadA" Content="Поток A:" FontSize="14" FontWeight="DemiBold" VerticalAlignment="Center" />
                 <Separator Grid.Row="1" />
                 <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Disabled">
-                    <RichTextBox Name="richtextboxOperationInThreadA" FontSize="14" IsReadOnly="True" BorderThickness="0" FontFamily="Courier New" />
+                    <RichTextBox Name="richtextboxOperationInThreadA" FontSize="14" IsReadOnly="True" BorderThickness="0" FontFamily="Courier New" FontWeight="DemiBold" />
                 </ScrollViewer>
                 <Separator Grid.Row="3" />
-                <Label Grid.Row="4" Content="Интервал выполнения операций:" HorizontalContentAlignment="Center" />
+                <Label Name="labelIntervalRunningOperationsInThreadA" Grid.Row="4" Content="Интервал выполнения операций:" HorizontalContentAlignment="Center" />
                 <ComboBox Name="comboboxIntervalRunningOperationsInThreadA" Grid.Row="5" Margin="5,0,5,5">
                     <ComboBox.Items>
                         <ComboBoxItem Content="1 секунда" />
@@ -54,7 +54,7 @@
                     </ComboBox.Items>
                 </ComboBox>
                 <Separator Grid.Row="6" />
-                <Button Name="buttonSwitchingOnAndOffThreadA" Grid.Row="7" Content="Включен" Padding="5" Margin="5" FontWeight="DemiBold" VerticalAlignment="Center" />
+                <Button Name="buttonSwitchingOnAndOffThreadA" Grid.Row="7" Content="Включен" Padding="5" Margin="5" FontWeight="DemiBold" VerticalAlignment="Center" Foreground="Black" Click="SwitchingOnAndOffStreams" />
             </Grid>
         </Border>
 
@@ -71,13 +71,13 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-                <Label Content="Поток B:" FontSize="14" FontWeight="DemiBold" VerticalAlignment="Center" />
+                <Label Name="labelHeaderThreadB" Content="Поток B:" FontSize="14" FontWeight="DemiBold" VerticalAlignment="Center" />
                 <Separator Grid.Row="1" />
                 <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Disabled">
-                    <RichTextBox Name="richtextboxOperationInThreadB" FontSize="14" IsReadOnly="True" BorderThickness="0" FontFamily="Courier New" />
+                    <RichTextBox Name="richtextboxOperationInThreadB" FontSize="14" IsReadOnly="True" BorderThickness="0" FontFamily="Courier New" FontWeight="DemiBold" />
                 </ScrollViewer>
                 <Separator Grid.Row="3" />
-                <Label Grid.Row="4" Content="Интервал выполнения операций:" HorizontalContentAlignment="Center" />
+                <Label Name="labelIntervalRunningOperationsInThreadB" Grid.Row="4" Content="Интервал выполнения операций:" HorizontalContentAlignment="Center" />
                 <ComboBox Name="comboboxIntervalRunningOperationsInThreadB" Grid.Row="5" Margin="5,0,5,5">
                     <ComboBox.Items>
                         <ComboBoxItem Content="1 секунда" />
@@ -88,7 +88,7 @@
                     </ComboBox.Items>
                 </ComboBox>
                 <Separator Grid.Row="6" />
-                <Button Name="buttonSwitchingOnAndOffThreadB" Grid.Row="7" Content="Включен" Padding="5" Margin="5" FontWeight="DemiBold" VerticalAlignment="Center" />
+                <Button Name="buttonSwitchingOnAndOffThreadB" Grid.Row="7" Content="Включен" Padding="5" Margin="5" FontWeight="DemiBold" VerticalAlignment="Center" Foreground="Black" Click="SwitchingOnAndOffStreams" />
             </Grid>
         </Border>
 
@@ -105,13 +105,13 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-                <Label Content="Поток C:" FontSize="14" FontWeight="DemiBold" VerticalAlignment="Center" />
+                <Label Name="labelHeaderThreadC" Content="Поток C:" FontSize="14" FontWeight="DemiBold" VerticalAlignment="Center" />
                 <Separator Grid.Row="1" />
                 <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Disabled">
-                    <RichTextBox Name="richtextboxOperationInThreadC" FontSize="14" IsReadOnly="True" BorderThickness="0" FontFamily="Courier New" />
+                    <RichTextBox Name="richtextboxOperationInThreadC" FontSize="14" IsReadOnly="True" BorderThickness="0" FontFamily="Courier New" FontWeight="DemiBold" />
                 </ScrollViewer>
                 <Separator Grid.Row="3" />
-                <Label Grid.Row="4" Content="Интервал выполнения операций:" HorizontalContentAlignment="Center" />
+                <Label Name="labelIntervalRunningOperationsInThreadC" Grid.Row="4" Content="Интервал выполнения операций:" HorizontalContentAlignment="Center" />
                 <ComboBox Name="comboboxIntervalRunningOperationsInThreadC" Grid.Row="5" Margin="5,0,5,5">
                     <ComboBox.Items>
                         <ComboBoxItem Content="1 секунда" />
@@ -122,7 +122,7 @@
                     </ComboBox.Items>
                 </ComboBox>
                 <Separator Grid.Row="6" />
-                <Button Name="buttonSwitchingOnAndOffThreadC" Grid.Row="7" Content="Включен" Padding="5" Margin="5" FontWeight="DemiBold" VerticalAlignment="Center" />
+                <Button Name="buttonSwitchingOnAndOffThreadC" Grid.Row="7" Content="Включен" Padding="5" Margin="5" FontWeight="DemiBold" VerticalAlignment="Center" Foreground="Black" Click="SwitchingOnAndOffStreams" />
             </Grid>
         </Border>
 
@@ -139,13 +139,13 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-                <Label Content="Поток D:" FontSize="14" FontWeight="DemiBold" VerticalAlignment="Center" />
+                <Label Name="labelHeaderThreadD" Content="Поток D:" FontSize="14" FontWeight="DemiBold" VerticalAlignment="Center" />
                 <Separator Grid.Row="1" />
                 <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Disabled">
-                    <RichTextBox Name="richtextboxOperationInThreadD" FontSize="14" IsReadOnly="True" BorderThickness="0" FontFamily="Courier New" />
+                    <RichTextBox Name="richtextboxOperationInThreadD" FontSize="14" IsReadOnly="True" BorderThickness="0" FontFamily="Courier New" FontWeight="DemiBold" />
                 </ScrollViewer>
                 <Separator Grid.Row="3" />
-                <Label Grid.Row="4" Content="Интервал выполнения операций:" HorizontalContentAlignment="Center" />
+                <Label Name="labelIntervalRunningOperationsInThreadD" Grid.Row="4" Content="Интервал выполнения операций:" HorizontalContentAlignment="Center" />
                 <ComboBox Name="comboboxIntervalRunningOperationsInThreadD" Grid.Row="5" Margin="5,0,5,5">
                     <ComboBox.Items>
                         <ComboBoxItem Content="1 секунда" />
@@ -156,7 +156,7 @@
                     </ComboBox.Items>
                 </ComboBox>
                 <Separator Grid.Row="6" />
-                <Button Name="buttonSwitchingOnAndOffThreadD" Grid.Row="7" Content="Включен" Padding="5" Margin="5" FontWeight="DemiBold" VerticalAlignment="Center" />
+                <Button Name="buttonSwitchingOnAndOffThreadD" Grid.Row="7" Content="Включен" Padding="5" Margin="5" FontWeight="DemiBold" VerticalAlignment="Center" Foreground="Black" Click="SwitchingOnAndOffStreams" />
             </Grid>
         </Border>
 
@@ -173,9 +173,9 @@
                     <ColumnDefinition />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
-                <Button Name="buttonLoadStringOperations" Content="Загрузить строковые операции" Margin="12,5,-2,5" Padding="5" />
-                <Button Name="buttonLoadIntegerOperations" Grid.Column="1" Content="Загрузить численные операции" Margin="10,5,2,5" Padding="5" />
-                <Button Name="buttonLoadCharacterOperations" Grid.Column="2" Content="Загрузить символьные операции" Margin="6,5,3,5" Padding="5" />
+                <Button Name="buttonLoadStringOperations" Content="Загрузить строковые операции" Margin="12,5,-2,5" Padding="5" Click="LoadStringOperations" />
+                <Button Name="buttonLoadIntegerOperations" Grid.Column="1" Content="Загрузить численные операции" Margin="10,5,2,5" Padding="5" Click="LoadIntegerOperations" />
+                <Button Name="buttonLoadCharacterOperations" Grid.Column="2" Content="Загрузить символьные операции" Margin="6,5,3,5" Padding="5" Click="LoadCharacterOperations" />
             </Grid>
         </Border>
 
@@ -186,7 +186,7 @@
             </Border.Effect>
         </Border>
         <Border Grid.Row="2" Grid.Column="3" BorderBrush="LightSkyBlue" BorderThickness="2" Margin="-1,8,-10,8" CornerRadius="10">
-                <Button Name="buttonRunThreads" Content="ЗАПУСТИТЬ ПОТОКИ" Margin="3,5,12,5" Padding="5" Foreground="DarkBlue" FontWeight="DemiBold" />
+                <Button Name="buttonRunThreads" Content="ЗАПУСТИТЬ ПОТОКИ" Margin="3,5,12,5" Padding="5" Foreground="DarkBlue" FontWeight="DemiBold" Click="RunThreads" />
         </Border>
 
         <!-- Последовательность выполнения операций -->
