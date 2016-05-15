@@ -4,5 +4,147 @@
         <name>ThreadSafeQueue.Logic</name>
     </assembly>
     <members>
+        <member name="T:ThreadSafeQueue.Logic.AddOperationInReportEventArgs">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ThreadSafeQueue.Logic.AddOperationInReportEventArgs.Operation">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:ThreadSafeQueue.Logic.AddOperationInReportEventArgs.#ctor(ThreadSafeQueue.Logic.Operation)">
+            <summary>
+            
+            </summary>
+            <param name="operation"></param>
+        </member>
+        <member name="T:ThreadSafeQueue.Logic.Report">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:ThreadSafeQueue.Logic.Report.operations">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:ThreadSafeQueue.Logic.Report.AddOperationInReportEventHandler">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="E:ThreadSafeQueue.Logic.Report.AddOperationInReport">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:ThreadSafeQueue.Logic.Report.Add(System.String,System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="itemsBeforeOperation"></param>
+            <param name="name"></param>
+            <param name="itemsAfterOperation"></param>
+        </member>
+        <member name="T:ThreadSafeQueue.Logic.Operation">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ThreadSafeQueue.Logic.Operation.DateTime">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ThreadSafeQueue.Logic.Operation.ItemsBeforeOperation">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ThreadSafeQueue.Logic.Operation.Name">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ThreadSafeQueue.Logic.Operation.ItemsAfterOperation">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:ThreadSafeQueue.Logic.Operation.#ctor(System.String,System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="itemsBeforeOperation"></param>
+            <param name="name"></param>
+            <param name="itemsAfterOperation"></param>
+        </member>
+        <member name="M:ThreadSafeQueue.Logic.Operation.ToString">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:ThreadSafeQueue.Logic.ThreadSafeQueue`1">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="F:ThreadSafeQueue.Logic.ThreadSafeQueue`1.queue">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:ThreadSafeQueue.Logic.ThreadSafeQueue`1.report">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:ThreadSafeQueue.Logic.ThreadSafeQueue`1.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:ThreadSafeQueue.Logic.ThreadSafeQueue`1.#ctor(ThreadSafeQueue.Logic.Report)">
+            <summary>
+            
+            </summary>
+            <param name="report"></param>
+        </member>
+        <member name="M:ThreadSafeQueue.Logic.ThreadSafeQueue`1.Push(`0)">
+            <summary>
+            
+            </summary>
+            <param name="item"></param>
+        </member>
+        <member name="M:ThreadSafeQueue.Logic.ThreadSafeQueue`1.Pop">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ThreadSafeQueue.Logic.ThreadSafeQueue`1.GetAbbreviatedNameOfType(`0)">
+            <summary>
+            
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ThreadSafeQueue.Logic.ThreadSafeQueue`1.ToString(`0)">
+            <summary>
+            
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ThreadSafeQueue.Logic.ThreadSafeQueue`1.ToString">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
     </members>
 </doc>

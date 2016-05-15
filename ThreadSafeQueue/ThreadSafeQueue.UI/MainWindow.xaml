@@ -199,7 +199,7 @@
                 </Grid.RowDefinitions>
                 <Label Content="Последовательность выполнения операций:" FontSize="14" FontWeight="DemiBold" VerticalAlignment="Center" />
                 <Separator Grid.Row="1" />
-                <ScrollViewer Grid.Row="2" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Disabled">
+                <ScrollViewer Grid.Row="2">
                     <RichTextBox Name="richtextboxSequenceOperations" FontSize="14" IsReadOnly="True" BorderThickness="0" />
                 </ScrollViewer>
             </Grid>
