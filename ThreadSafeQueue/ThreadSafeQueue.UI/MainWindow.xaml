@@ -54,7 +54,7 @@
                     </ComboBox.Items>
                 </ComboBox>
                 <Separator Grid.Row="6" />
-                <Button Name="buttonSwitchingOnAndOffThreadA" Grid.Row="7" Content="Включен" Padding="5" Margin="5" FontWeight="DemiBold" VerticalAlignment="Center" Foreground="Black" Click="SwitchingOnAndOffStreams" />
+                <Button Name="buttonSwitchingOnAndOffThreadA" Grid.Row="7" Content="Включен" Padding="5" Margin="5" FontWeight="DemiBold" VerticalAlignment="Center" Foreground="Black" Click="SwitchingOnAndOffThreads" />
             </Grid>
         </Border>
 
@@ -88,7 +88,7 @@
                     </ComboBox.Items>
                 </ComboBox>
                 <Separator Grid.Row="6" />
-                <Button Name="buttonSwitchingOnAndOffThreadB" Grid.Row="7" Content="Включен" Padding="5" Margin="5" FontWeight="DemiBold" VerticalAlignment="Center" Foreground="Black" Click="SwitchingOnAndOffStreams" />
+                <Button Name="buttonSwitchingOnAndOffThreadB" Grid.Row="7" Content="Включен" Padding="5" Margin="5" FontWeight="DemiBold" VerticalAlignment="Center" Foreground="Black" Click="SwitchingOnAndOffThreads" />
             </Grid>
         </Border>
 
@@ -122,7 +122,7 @@
                     </ComboBox.Items>
                 </ComboBox>
                 <Separator Grid.Row="6" />
-                <Button Name="buttonSwitchingOnAndOffThreadC" Grid.Row="7" Content="Включен" Padding="5" Margin="5" FontWeight="DemiBold" VerticalAlignment="Center" Foreground="Black" Click="SwitchingOnAndOffStreams" />
+                <Button Name="buttonSwitchingOnAndOffThreadC" Grid.Row="7" Content="Включен" Padding="5" Margin="5" FontWeight="DemiBold" VerticalAlignment="Center" Foreground="Black" Click="SwitchingOnAndOffThreads" />
             </Grid>
         </Border>
 
@@ -156,7 +156,7 @@
                     </ComboBox.Items>
                 </ComboBox>
                 <Separator Grid.Row="6" />
-                <Button Name="buttonSwitchingOnAndOffThreadD" Grid.Row="7" Content="Включен" Padding="5" Margin="5" FontWeight="DemiBold" VerticalAlignment="Center" Foreground="Black" Click="SwitchingOnAndOffStreams" />
+                <Button Name="buttonSwitchingOnAndOffThreadD" Grid.Row="7" Content="Включен" Padding="5" Margin="5" FontWeight="DemiBold" VerticalAlignment="Center" Foreground="Black" Click="SwitchingOnAndOffThreads" />
             </Grid>
         </Border>
 
@@ -173,9 +173,9 @@
                     <ColumnDefinition />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
-                <Button Name="buttonLoadStringOperations" Content="Загрузить строковые операции" Margin="12,5,-2,5" Padding="5" Click="LoadStringOperations" />
-                <Button Name="buttonLoadIntegerOperations" Grid.Column="1" Content="Загрузить численные операции" Margin="10,5,2,5" Padding="5" Click="LoadIntegerOperations" />
-                <Button Name="buttonLoadCharacterOperations" Grid.Column="2" Content="Загрузить символьные операции" Margin="6,5,3,5" Padding="5" Click="LoadCharacterOperations" />
+                <Button Name="buttonLoadStringOperations" Content="Загрузить строковые операции" Margin="12,5,-2,5" Padding="5" Click="LoadStringOperationsInThreads" />
+                <Button Name="buttonLoadIntegerOperations" Grid.Column="1" Content="Загрузить численные операции" Margin="10,5,2,5" Padding="5" Click="LoadIntegerOperationsInThreads" />
+                <Button Name="buttonLoadCharacterOperations" Grid.Column="2" Content="Загрузить символьные операции" Margin="6,5,3,5" Padding="5" Click="LoadCharacterOperationsInThreads" />
             </Grid>
         </Border>
 
