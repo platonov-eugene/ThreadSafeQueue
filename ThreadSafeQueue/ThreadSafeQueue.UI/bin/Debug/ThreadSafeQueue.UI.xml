@@ -30,6 +30,16 @@
             MainWindow
             </summary>
         </member>
+        <member name="P:ThreadSafeQueue.UI.MainWindow.ThreadsStartupOption">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:ThreadSafeQueue.UI.MainWindow.Threads">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="M:ThreadSafeQueue.UI.MainWindow.#ctor">
             <summary>
             Конструктор по умолчанию формы приложения

@@ -68,15 +68,40 @@ namespace ThreadSafeQueue.Logic
         {
             lock (queue)
             {
-                string itemsBeforeOperation = ToString();
+                bool isWaiting = false;
 
                 while (queue.Count == 0)
-                    Monitor.Wait(queue);
-                T result = queue.Dequeue();
+                {
+                    string itemsBeforeOperation = ToString();
+                    string name = Thread.CurrentThread.Name + " - " + GetCSharpTypeName() + " Pop()";
+                    string itemsAfterOperation = "ожидание нового элемента";
+                    report.Add(itemsBeforeOperation, name, itemsAfterOperation);
 
-                string name = Thread.CurrentThread.Name + " - " + GetAbbreviatedNameOfType(result) + " Pop()";
-                string itemsAfterOperation = ToString();
-                report.Add(itemsBeforeOperation, name, itemsAfterOperation);
+                    isWaiting = true;
+
+                    Monitor.Wait(queue);
+                }
+
+                T result;
+
+                if (isWaiting)
+                {
+                    string itemsBeforeOperation = ToString();
+                    result = queue.Dequeue();
+
+                    string name = "Ожидающий " + ToLowerFirstCharacter(Thread.CurrentThread.Name) + " - " + GetCSharpTypeName() + " Pop()";
+                    string itemsAfterOperation = ToString();
+                    report.Add(itemsBeforeOperation, name, itemsAfterOperation);
+                }
+                else
+                {
+                    string itemsBeforeOperation = ToString();
+                    result = queue.Dequeue();
+
+                    string name = Thread.CurrentThread.Name + " - " + GetCSharpTypeName() + " Pop()";
+                    string itemsAfterOperation = ToString();
+                    report.Add(itemsBeforeOperation, name, itemsAfterOperation);
+                }
 
                 return result;
             }
@@ -85,11 +110,25 @@ namespace ThreadSafeQueue.Logic
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="item"></param>
+        /// <param name="name"></param>
         /// <returns></returns>
-        public string GetAbbreviatedNameOfType(T item)
+        public string ToLowerFirstCharacter(string name)
         {
-            switch (item.GetType().FullName)
+            if (string.IsNullOrEmpty(name) || name.Length == 1)
+                return name;
+
+            return name[0].ToString().ToLower() + name.Substring(1);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public string GetCSharpTypeName()
+        {
+            string fullName = typeof(T).FullName;
+
+            switch (fullName)
             {
                 case "System.String":
                     return "string";
@@ -98,7 +137,7 @@ namespace ThreadSafeQueue.Logic
                 case "System.Int32":
                     return "int";
                 default:
-                    return item.GetType().FullName;
+                    return fullName;
             }
         }
 
@@ -109,14 +148,14 @@ namespace ThreadSafeQueue.Logic
         /// <returns></returns>
         public string ToString(T item)
         {
-            switch (item.GetType().FullName)
+            switch (typeof(T).FullName)
             {
                 case "System.String":
-                    return "\"" + item + "\" ";
+                    return "\"" + item + "\"";
                 case "System.Char":
-                    return "\'" + item + "\' ";
+                    return "\'" + item + "\'";
                 default:
-                    return item + " ";
+                    return item.ToString();
             }
         }
 
@@ -132,9 +171,10 @@ namespace ThreadSafeQueue.Logic
             {
                 string result = string.Empty;
 
-                foreach (T item in queue)
+                for (int index = queue.Count - 1; index >= 0; index--)
                 {
-                    switch (item.GetType().FullName)
+                    T item = queue.ElementAt(index);
+                    switch (typeof(T).FullName)
                     {
                         case "System.String":
                             result += "\"" + item + "\" ";

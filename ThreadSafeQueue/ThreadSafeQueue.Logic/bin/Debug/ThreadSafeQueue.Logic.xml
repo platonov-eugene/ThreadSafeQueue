@@ -126,11 +126,17 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:ThreadSafeQueue.Logic.ThreadSafeQueue`1.GetAbbreviatedNameOfType(`0)">
+        <member name="M:ThreadSafeQueue.Logic.ThreadSafeQueue`1.ToLowerFirstCharacter(System.String)">
             <summary>
             
             </summary>
-            <param name="item"></param>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ThreadSafeQueue.Logic.ThreadSafeQueue`1.GetCSharpTypeName">
+            <summary>
+            
+            </summary>
             <returns></returns>
         </member>
         <member name="M:ThreadSafeQueue.Logic.ThreadSafeQueue`1.ToString(`0)">
@@ -145,6 +151,26 @@
             
             </summary>
             <returns></returns>
+        </member>
+        <member name="T:ThreadSafeQueue.Logic.ThreadsStartupOption">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:ThreadSafeQueue.Logic.ThreadsStartupOption.String">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:ThreadSafeQueue.Logic.ThreadsStartupOption.Integer">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:ThreadSafeQueue.Logic.ThreadsStartupOption.Char">
+            <summary>
+            
+            </summary>
         </member>
     </members>
 </doc>

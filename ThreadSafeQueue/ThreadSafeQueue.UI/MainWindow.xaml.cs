@@ -23,11 +23,22 @@ namespace ThreadSafeQueue.UI
     public partial class MainWindow : Window
     {
         /// <summary>
+        /// 
+        /// </summary>
+        public ThreadsStartupOption ThreadsStartupOption { get; private set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Thread[] Threads = new Thread[4];
+
+        /// <summary>
         /// Конструктор по умолчанию формы приложения
         /// </summary>
         public MainWindow()
         {
             InitializeComponent();
+            LoadStringOperationsInThreads(buttonLoadStringOperations, new RoutedEventArgs());
         }
 
         private void SwitchingOnAndOffThreads(object sender, RoutedEventArgs e)
@@ -75,14 +86,14 @@ namespace ThreadSafeQueue.UI
                 MessageBox.Show("Для успешного запуска потоков необходимо выполнить включение в работу как минимум одного из потоков.", "Ошибка при запуске потоков", MessageBoxButton.OK, MessageBoxImage.Warning);
             else
             {
-                Cursor = Cursors.Wait;
-                buttonRunThreads.IsEnabled = false;
                 richtextboxSequenceOperations.Document.Blocks.Clear();
 
-                RunThreadsWithStringOperations();
-
-                buttonRunThreads.IsEnabled = true;
-                Cursor = Cursors.Arrow;
+                if (ThreadsStartupOption == ThreadsStartupOption.String)
+                    RunThreadsWithStringOperations();
+                else if (ThreadsStartupOption == ThreadsStartupOption.Integer)
+                    RunThreadsWithIntegerOperations();
+                else if (ThreadsStartupOption == ThreadsStartupOption.Char)
+                    RunThreadsWithCharacterOperations();
             }
         }
 
@@ -95,19 +106,32 @@ namespace ThreadSafeQueue.UI
                 else
                     richtextboxSequenceOperations.AppendText(e.Operation.ToString());
 
-                // Выполнить форматирование текста
-                //foreach (Paragraph paragraph in richTextBox.Document.Blocks)
-                //    if (new TextRange(paragraph.ContentStart, paragraph.ContentEnd).Text.Contains("Push"))
-                //        paragraph.Foreground = Brushes.Green;
-                //    else
-                //        paragraph.Foreground = Brushes.Blue;
+                int count = richtextboxSequenceOperations.Document.Blocks.Count;
+                richtextboxSequenceOperations.Document.Blocks.ElementAt(count - 5).FontWeight = FontWeights.DemiBold;
+                richtextboxSequenceOperations.Document.Blocks.ElementAt(count - 5).TextAlignment = TextAlignment.Center;
 
-                richtextboxSequenceOperations.ScrollToEnd();
+                Paragraph paragraph = (Paragraph)richtextboxSequenceOperations.Document.Blocks.ElementAt(count - 3);
+                if (new TextRange(paragraph.ContentStart, paragraph.ContentEnd).Text.Contains("Push"))
+                    richtextboxSequenceOperations.Document.Blocks.ElementAt(count - 3).Foreground = Brushes.Green;
+                else
+                {
+                    paragraph = (Paragraph)richtextboxSequenceOperations.Document.Blocks.ElementAt(count - 2);
+                    if (new TextRange(paragraph.ContentStart, paragraph.ContentEnd).Text.Contains("ожидание нового элемента"))
+                        richtextboxSequenceOperations.Document.Blocks.ElementAt(count - 3).Foreground = Brushes.Red;
+                    else
+                        richtextboxSequenceOperations.Document.Blocks.ElementAt(count - 3).Foreground = Brushes.Blue;
+                }
+
+                scrollViewerSequenceOperations.ScrollToEnd();
             }));
         }
 
         private void RunThreadsWithStringOperations()
         {
+            foreach (Thread thread in Threads)
+                if (thread != null && thread.IsAlive)
+                    thread.Abort();
+
             Report report = new Report();
             report.AddOperationInReport += AddOperationInReport;
 
@@ -115,16 +139,29 @@ namespace ThreadSafeQueue.UI
 
             Thread threadA = new Thread(ThreadAWithStringOperations);
             threadA.Name = "Поток А";
-            threadA.Start(threadSafeQueue);
+            
             Thread threadB = new Thread(ThreadBWithStringOperations);
             threadB.Name = "Поток B";
-            threadB.Start(threadSafeQueue);
+            
             Thread threadC = new Thread(ThreadCWithStringOperations);
             threadC.Name = "Поток C";
-            threadC.Start(threadSafeQueue);
+            
             Thread threadD = new Thread(ThreadDWithStringOperations);
             threadD.Name = "Поток D";
-            threadD.Start(threadSafeQueue);
+
+            Threads =  new Thread[] { threadA, threadB, threadC, threadD };
+
+            if (richtextboxOperationInThreadA.IsEnabled)
+                threadA.Start(threadSafeQueue);
+
+            if (richtextboxOperationInThreadB.IsEnabled)
+                threadB.Start(threadSafeQueue);
+
+            if (richtextboxOperationInThreadC.IsEnabled)
+                threadC.Start(threadSafeQueue);
+
+            if (richtextboxOperationInThreadD.IsEnabled)
+                threadD.Start(threadSafeQueue);
         }
 
         private void ThreadAWithStringOperations(object data)
@@ -132,34 +169,34 @@ namespace ThreadSafeQueue.UI
             int intervalRunningOperationsInThreadA = 0;
             comboboxIntervalRunningOperationsInThreadA.Dispatcher.Invoke(new Action(() => 
             {
-                intervalRunningOperationsInThreadA = comboboxIntervalRunningOperationsInThreadA.SelectedIndex + 1 * 1000;
+                intervalRunningOperationsInThreadA = (comboboxIntervalRunningOperationsInThreadA.SelectedIndex + 1) * 1000;
             }));
 
             ThreadSafeQueue<string> threadSafeQueue = data as ThreadSafeQueue<string>;
 
             threadSafeQueue.Pop();
-            //Thread.Sleep(intervalRunningOperationsInThreadA);
+            Thread.Sleep(intervalRunningOperationsInThreadA);
 
             threadSafeQueue.Push("ABC");
-            //Thread.Sleep(intervalRunningOperationsInThreadA);
+            Thread.Sleep(intervalRunningOperationsInThreadA);
 
             threadSafeQueue.Push("DEF");
-            //Thread.Sleep(intervalRunningOperationsInThreadA);
+            Thread.Sleep(intervalRunningOperationsInThreadA);
 
             threadSafeQueue.Push("GHI");
-            //Thread.Sleep(intervalRunningOperationsInThreadA);
+            Thread.Sleep(intervalRunningOperationsInThreadA);
 
             threadSafeQueue.Push("JKL");
-            //Thread.Sleep(intervalRunningOperationsInThreadA);
+            Thread.Sleep(intervalRunningOperationsInThreadA);
 
             threadSafeQueue.Pop();
-            //Thread.Sleep(intervalRunningOperationsInThreadA);
+            Thread.Sleep(intervalRunningOperationsInThreadA);
 
             threadSafeQueue.Pop();
-            //Thread.Sleep(intervalRunningOperationsInThreadA);
+            Thread.Sleep(intervalRunningOperationsInThreadA);
 
             threadSafeQueue.Push("MNO");
-            //Thread.Sleep(intervalRunningOperationsInThreadA);
+            Thread.Sleep(intervalRunningOperationsInThreadA);
         }
 
         private void ThreadBWithStringOperations(object data)
@@ -167,72 +204,460 @@ namespace ThreadSafeQueue.UI
             int intervalRunningOperationsInThreadB = 0;
             comboboxIntervalRunningOperationsInThreadB.Dispatcher.Invoke(new Action(() =>
             {
-                intervalRunningOperationsInThreadB = comboboxIntervalRunningOperationsInThreadB.SelectedIndex + 1 * 1000;
+                intervalRunningOperationsInThreadB = (comboboxIntervalRunningOperationsInThreadB.SelectedIndex + 1) * 1000;
             }));
 
             ThreadSafeQueue<string> threadSafeQueue = data as ThreadSafeQueue<string>;
 
             threadSafeQueue.Push("PQR");
-            //Thread.Sleep(intervalRunningOperationsInThreadB);
+            Thread.Sleep(intervalRunningOperationsInThreadB);
 
             threadSafeQueue.Push("STU");
-            //Thread.Sleep(intervalRunningOperationsInThreadB);
+            Thread.Sleep(intervalRunningOperationsInThreadB);
 
             threadSafeQueue.Push("VMX");
-            //Thread.Sleep(intervalRunningOperationsInThreadB);
+            Thread.Sleep(intervalRunningOperationsInThreadB);
 
             threadSafeQueue.Pop();
-            //Thread.Sleep(intervalRunningOperationsInThreadB);
+            Thread.Sleep(intervalRunningOperationsInThreadB);
 
             threadSafeQueue.Push("YZA");
-            //Thread.Sleep(intervalRunningOperationsInThreadB);
+            Thread.Sleep(intervalRunningOperationsInThreadB);
 
             threadSafeQueue.Pop();
-            //Thread.Sleep(intervalRunningOperationsInThreadB);
+            Thread.Sleep(intervalRunningOperationsInThreadB);
 
             threadSafeQueue.Push("AGM");
-            //Thread.Sleep(intervalRunningOperationsInThreadB);
+            Thread.Sleep(intervalRunningOperationsInThreadB);
 
             threadSafeQueue.Push("BHN");
-            //Thread.Sleep(intervalRunningOperationsInThreadB);
+            Thread.Sleep(intervalRunningOperationsInThreadB);
         }
 
         private void ThreadCWithStringOperations(object data)
         {
+            int intervalRunningOperationsInThreadC = 0;
+            comboboxIntervalRunningOperationsInThreadC.Dispatcher.Invoke(new Action(() =>
+            {
+                intervalRunningOperationsInThreadC = (comboboxIntervalRunningOperationsInThreadC.SelectedIndex + 1) * 1000;
+            }));
+
             ThreadSafeQueue<string> threadSafeQueue = data as ThreadSafeQueue<string>;
 
             threadSafeQueue.Pop();
+            Thread.Sleep(intervalRunningOperationsInThreadC);
+
             threadSafeQueue.Pop();
+            Thread.Sleep(intervalRunningOperationsInThreadC);
+
             threadSafeQueue.Pop();
+            Thread.Sleep(intervalRunningOperationsInThreadC);
+
             threadSafeQueue.Push("CIO");
+            Thread.Sleep(intervalRunningOperationsInThreadC);
+
             threadSafeQueue.Push("DJP");
+            Thread.Sleep(intervalRunningOperationsInThreadC);
+
             threadSafeQueue.Push("EKQ");
+            Thread.Sleep(intervalRunningOperationsInThreadC);
+
             threadSafeQueue.Push("FLR");
+            Thread.Sleep(intervalRunningOperationsInThreadC);
+
             threadSafeQueue.Push("MSX");
+            Thread.Sleep(intervalRunningOperationsInThreadC);
         }
 
         private void ThreadDWithStringOperations(object data)
         {
+            int intervalRunningOperationsInThreadD = 0;
+            comboboxIntervalRunningOperationsInThreadD.Dispatcher.Invoke(new Action(() =>
+            {
+                intervalRunningOperationsInThreadD = (comboboxIntervalRunningOperationsInThreadD.SelectedIndex + 1) * 1000;
+            }));
+
             ThreadSafeQueue<string> threadSafeQueue = data as ThreadSafeQueue<string>;
 
             threadSafeQueue.Push("NTY");
+            Thread.Sleep(intervalRunningOperationsInThreadD);
+
             threadSafeQueue.Push("OUZ");
+            Thread.Sleep(intervalRunningOperationsInThreadD);
+
             threadSafeQueue.Pop();
+            Thread.Sleep(intervalRunningOperationsInThreadD);
+
             threadSafeQueue.Push("PVM");
+            Thread.Sleep(intervalRunningOperationsInThreadD);
+
             threadSafeQueue.Pop();
+            Thread.Sleep(intervalRunningOperationsInThreadD);
+
             threadSafeQueue.Push("QWR");
+            Thread.Sleep(intervalRunningOperationsInThreadD);
+
             threadSafeQueue.Pop();
+            Thread.Sleep(intervalRunningOperationsInThreadD);
+
             threadSafeQueue.Push("XYZ");
+            Thread.Sleep(intervalRunningOperationsInThreadD);
         }
 
         private void RunThreadsWithIntegerOperations()
         {
+            foreach (Thread thread in Threads)
+                if (thread != null && thread.IsAlive)
+                    thread.Abort();
 
+            Report report = new Report();
+            report.AddOperationInReport += AddOperationInReport;
+
+            ThreadSafeQueue<int> threadSafeQueue = new ThreadSafeQueue<int>(report);
+
+            Thread threadA = new Thread(ThreadAWithIntegerOperations);
+            threadA.Name = "Поток А";
+
+            Thread threadB = new Thread(ThreadBWithIntegerOperations);
+            threadB.Name = "Поток B";
+
+            Thread threadC = new Thread(ThreadCWithIntegerOperations);
+            threadC.Name = "Поток C";
+
+            Thread threadD = new Thread(ThreadDWithIntegerOperations);
+            threadD.Name = "Поток D";
+
+            Threads = new Thread[] { threadA, threadB, threadC, threadD };
+
+            if (richtextboxOperationInThreadA.IsEnabled)
+                threadA.Start(threadSafeQueue);
+
+            if (richtextboxOperationInThreadB.IsEnabled)
+                threadB.Start(threadSafeQueue);
+
+            if (richtextboxOperationInThreadC.IsEnabled)
+                threadC.Start(threadSafeQueue);
+
+            if (richtextboxOperationInThreadD.IsEnabled)
+                threadD.Start(threadSafeQueue);
+        }
+
+        private void ThreadAWithIntegerOperations(object data)
+        {
+            int intervalRunningOperationsInThreadA = 0;
+            comboboxIntervalRunningOperationsInThreadA.Dispatcher.Invoke(new Action(() =>
+            {
+                intervalRunningOperationsInThreadA = (comboboxIntervalRunningOperationsInThreadA.SelectedIndex + 1) * 1000;
+            }));
+
+            ThreadSafeQueue<int> threadSafeQueue = data as ThreadSafeQueue<int>;
+
+            threadSafeQueue.Pop();
+            Thread.Sleep(intervalRunningOperationsInThreadA);
+
+            threadSafeQueue.Push(-64);
+            Thread.Sleep(intervalRunningOperationsInThreadA);
+
+            threadSafeQueue.Push(378);
+            Thread.Sleep(intervalRunningOperationsInThreadA);
+
+            threadSafeQueue.Pop();
+            Thread.Sleep(intervalRunningOperationsInThreadA);
+
+            threadSafeQueue.Push(495);
+            Thread.Sleep(intervalRunningOperationsInThreadA);
+
+            threadSafeQueue.Push(560);
+            Thread.Sleep(intervalRunningOperationsInThreadA);
+
+            threadSafeQueue.Pop();
+            Thread.Sleep(intervalRunningOperationsInThreadA);
+
+            threadSafeQueue.Push(-91);
+            Thread.Sleep(intervalRunningOperationsInThreadA);
+        }
+
+        private void ThreadBWithIntegerOperations(object data)
+        {
+            int intervalRunningOperationsInThreadB = 0;
+            comboboxIntervalRunningOperationsInThreadB.Dispatcher.Invoke(new Action(() =>
+            {
+                intervalRunningOperationsInThreadB = (comboboxIntervalRunningOperationsInThreadB.SelectedIndex + 1) * 1000;
+            }));
+
+            ThreadSafeQueue<int> threadSafeQueue = data as ThreadSafeQueue<int>;
+
+            threadSafeQueue.Push(132);
+            Thread.Sleep(intervalRunningOperationsInThreadB);
+            
+            threadSafeQueue.Pop();
+            Thread.Sleep(intervalRunningOperationsInThreadB);
+
+            threadSafeQueue.Push(256);
+            Thread.Sleep(intervalRunningOperationsInThreadB);
+
+            threadSafeQueue.Pop();
+            Thread.Sleep(intervalRunningOperationsInThreadB);
+
+            threadSafeQueue.Push(-88);
+            Thread.Sleep(intervalRunningOperationsInThreadB);
+
+            threadSafeQueue.Push(804);
+            Thread.Sleep(intervalRunningOperationsInThreadB);
+
+            threadSafeQueue.Push(-70);
+            Thread.Sleep(intervalRunningOperationsInThreadB);
+
+            threadSafeQueue.Pop();
+            Thread.Sleep(intervalRunningOperationsInThreadB);
+        }
+
+        private void ThreadCWithIntegerOperations(object data)
+        {
+            int intervalRunningOperationsInThreadC = 0;
+            comboboxIntervalRunningOperationsInThreadC.Dispatcher.Invoke(new Action(() =>
+            {
+                intervalRunningOperationsInThreadC = (comboboxIntervalRunningOperationsInThreadC.SelectedIndex + 1) * 1000;
+            }));
+
+            ThreadSafeQueue<int> threadSafeQueue = data as ThreadSafeQueue<int>;
+
+            threadSafeQueue.Push(725);
+            Thread.Sleep(intervalRunningOperationsInThreadC);
+
+            threadSafeQueue.Pop();
+            Thread.Sleep(intervalRunningOperationsInThreadC);
+
+            threadSafeQueue.Push(953);
+            Thread.Sleep(intervalRunningOperationsInThreadC);
+
+            threadSafeQueue.Pop();
+            Thread.Sleep(intervalRunningOperationsInThreadC);
+
+            threadSafeQueue.Pop();
+            Thread.Sleep(intervalRunningOperationsInThreadC);
+
+            threadSafeQueue.Push(-48);
+            Thread.Sleep(intervalRunningOperationsInThreadC);
+
+            threadSafeQueue.Pop();
+            Thread.Sleep(intervalRunningOperationsInThreadC);
+
+            threadSafeQueue.Push(743);
+            Thread.Sleep(intervalRunningOperationsInThreadC);
+        }
+
+        private void ThreadDWithIntegerOperations(object data)
+        {
+            int intervalRunningOperationsInThreadD = 0;
+            comboboxIntervalRunningOperationsInThreadD.Dispatcher.Invoke(new Action(() =>
+            {
+                intervalRunningOperationsInThreadD = (comboboxIntervalRunningOperationsInThreadD.SelectedIndex + 1) * 1000;
+            }));
+
+            ThreadSafeQueue<int> threadSafeQueue = data as ThreadSafeQueue<int>;
+
+            threadSafeQueue.Pop();
+            Thread.Sleep(intervalRunningOperationsInThreadD);
+
+            threadSafeQueue.Pop();
+            Thread.Sleep(intervalRunningOperationsInThreadD);
+
+            threadSafeQueue.Push(-12);
+            Thread.Sleep(intervalRunningOperationsInThreadD);
+
+            threadSafeQueue.Pop();
+            Thread.Sleep(intervalRunningOperationsInThreadD);
+
+            threadSafeQueue.Push(-39);
+            Thread.Sleep(intervalRunningOperationsInThreadD);
+
+            threadSafeQueue.Pop();
+            Thread.Sleep(intervalRunningOperationsInThreadD);
+
+            threadSafeQueue.Pop();
+            Thread.Sleep(intervalRunningOperationsInThreadD);
+
+            threadSafeQueue.Push(154);
+            Thread.Sleep(intervalRunningOperationsInThreadD);
         }
 
         private void RunThreadsWithCharacterOperations()
         {
+            foreach (Thread thread in Threads)
+                if (thread != null && thread.IsAlive)
+                    thread.Abort();
 
+            Report report = new Report();
+            report.AddOperationInReport += AddOperationInReport;
+
+            ThreadSafeQueue<char> threadSafeQueue = new ThreadSafeQueue<char>(report);
+
+            Thread threadA = new Thread(ThreadAWithCharacterOperations);
+            threadA.Name = "Поток А";
+
+            Thread threadB = new Thread(ThreadBWithCharacterOperations);
+            threadB.Name = "Поток B";
+
+            Thread threadC = new Thread(ThreadCWithCharacterOperations);
+            threadC.Name = "Поток C";
+
+            Thread threadD = new Thread(ThreadDWithCharacterOperations);
+            threadD.Name = "Поток D";
+
+            Threads = new Thread[] { threadA, threadB, threadC, threadD };
+
+            if (richtextboxOperationInThreadA.IsEnabled)
+                threadA.Start(threadSafeQueue);
+
+            if (richtextboxOperationInThreadB.IsEnabled)
+                threadB.Start(threadSafeQueue);
+
+            if (richtextboxOperationInThreadC.IsEnabled)
+                threadC.Start(threadSafeQueue);
+
+            if (richtextboxOperationInThreadD.IsEnabled)
+                threadD.Start(threadSafeQueue);
+        }
+
+        private void ThreadAWithCharacterOperations(object data)
+        {
+            int intervalRunningOperationsInThreadA = 0;
+            comboboxIntervalRunningOperationsInThreadA.Dispatcher.Invoke(new Action(() =>
+            {
+                intervalRunningOperationsInThreadA = (comboboxIntervalRunningOperationsInThreadA.SelectedIndex + 1) * 1000;
+            }));
+
+            ThreadSafeQueue<char> threadSafeQueue = data as ThreadSafeQueue<char>;
+
+            threadSafeQueue.Pop();
+            Thread.Sleep(intervalRunningOperationsInThreadA);
+
+            threadSafeQueue.Push('А');
+            Thread.Sleep(intervalRunningOperationsInThreadA);
+
+            threadSafeQueue.Pop();
+            Thread.Sleep(intervalRunningOperationsInThreadA);
+
+            threadSafeQueue.Push('Б');
+            Thread.Sleep(intervalRunningOperationsInThreadA);
+
+            threadSafeQueue.Push('Я');
+            Thread.Sleep(intervalRunningOperationsInThreadA);
+
+            threadSafeQueue.Pop();
+            Thread.Sleep(intervalRunningOperationsInThreadA);
+
+            threadSafeQueue.Pop();
+            Thread.Sleep(intervalRunningOperationsInThreadA);
+
+            threadSafeQueue.Push('В');
+            Thread.Sleep(intervalRunningOperationsInThreadA);
+        }
+
+        private void ThreadBWithCharacterOperations(object data)
+        {
+            int intervalRunningOperationsInThreadB = 0;
+            comboboxIntervalRunningOperationsInThreadB.Dispatcher.Invoke(new Action(() =>
+            {
+                intervalRunningOperationsInThreadB = (comboboxIntervalRunningOperationsInThreadB.SelectedIndex + 1) * 1000;
+            }));
+
+            ThreadSafeQueue<char> threadSafeQueue = data as ThreadSafeQueue<char>;
+
+            threadSafeQueue.Push('Г');
+            Thread.Sleep(intervalRunningOperationsInThreadB);
+
+            threadSafeQueue.Pop();
+            Thread.Sleep(intervalRunningOperationsInThreadB);
+
+            threadSafeQueue.Pop();
+            Thread.Sleep(intervalRunningOperationsInThreadB);
+
+            threadSafeQueue.Pop();
+            Thread.Sleep(intervalRunningOperationsInThreadB);
+
+            threadSafeQueue.Pop();
+            Thread.Sleep(intervalRunningOperationsInThreadB);
+
+            threadSafeQueue.Push('Д');
+            Thread.Sleep(intervalRunningOperationsInThreadB);
+
+            threadSafeQueue.Push('Е');
+            Thread.Sleep(intervalRunningOperationsInThreadB);
+
+            threadSafeQueue.Push('Ё');
+            Thread.Sleep(intervalRunningOperationsInThreadB);
+        }
+
+        private void ThreadCWithCharacterOperations(object data)
+        {
+            int intervalRunningOperationsInThreadC = 0;
+            comboboxIntervalRunningOperationsInThreadC.Dispatcher.Invoke(new Action(() =>
+            {
+                intervalRunningOperationsInThreadC = (comboboxIntervalRunningOperationsInThreadC.SelectedIndex + 1) * 1000;
+            }));
+
+            ThreadSafeQueue<char> threadSafeQueue = data as ThreadSafeQueue<char>;
+
+            threadSafeQueue.Push('Ж');
+            Thread.Sleep(intervalRunningOperationsInThreadC);
+
+            threadSafeQueue.Push('З');
+            Thread.Sleep(intervalRunningOperationsInThreadC);
+
+            threadSafeQueue.Pop();
+            Thread.Sleep(intervalRunningOperationsInThreadC);
+
+            threadSafeQueue.Push('И');
+            Thread.Sleep(intervalRunningOperationsInThreadC);
+
+            threadSafeQueue.Push('Й');
+            Thread.Sleep(intervalRunningOperationsInThreadC);
+
+            threadSafeQueue.Pop();
+            Thread.Sleep(intervalRunningOperationsInThreadC);
+
+            threadSafeQueue.Push('К');
+            Thread.Sleep(intervalRunningOperationsInThreadC);
+
+            threadSafeQueue.Pop();
+            Thread.Sleep(intervalRunningOperationsInThreadC);
+        }
+
+        private void ThreadDWithCharacterOperations(object data)
+        {
+            int intervalRunningOperationsInThreadD = 0;
+            comboboxIntervalRunningOperationsInThreadD.Dispatcher.Invoke(new Action(() =>
+            {
+                intervalRunningOperationsInThreadD = (comboboxIntervalRunningOperationsInThreadD.SelectedIndex + 1) * 1000;
+            }));
+
+            ThreadSafeQueue<char> threadSafeQueue = data as ThreadSafeQueue<char>;
+
+            threadSafeQueue.Pop();
+            Thread.Sleep(intervalRunningOperationsInThreadD);
+
+            threadSafeQueue.Pop();
+            Thread.Sleep(intervalRunningOperationsInThreadD);
+
+            threadSafeQueue.Pop();
+            Thread.Sleep(intervalRunningOperationsInThreadD);
+
+            threadSafeQueue.Pop();
+            Thread.Sleep(intervalRunningOperationsInThreadD);
+
+            threadSafeQueue.Pop();
+            Thread.Sleep(intervalRunningOperationsInThreadD);
+
+            threadSafeQueue.Pop();
+            Thread.Sleep(intervalRunningOperationsInThreadD);
+
+            threadSafeQueue.Pop();
+            Thread.Sleep(intervalRunningOperationsInThreadD);
+
+            threadSafeQueue.Push('Л');
+            Thread.Sleep(intervalRunningOperationsInThreadD);
         }
 
         private void EnableAndCleanAllThreads()
@@ -337,6 +762,7 @@ namespace ThreadSafeQueue.UI
             comboboxIntervalRunningOperationsInThreadD.SelectedIndex = 0;
 
             FormattingDefinedOperationsInThreads();
+            ThreadsStartupOption = ThreadsStartupOption.String;
             Cursor = Cursors.Arrow;
         }
 
@@ -386,6 +812,7 @@ namespace ThreadSafeQueue.UI
             comboboxIntervalRunningOperationsInThreadD.SelectedIndex = 0;
 
             FormattingDefinedOperationsInThreads();
+            ThreadsStartupOption = ThreadsStartupOption.Integer;
             Cursor = Cursors.Arrow;
         }
 
@@ -435,7 +862,15 @@ namespace ThreadSafeQueue.UI
             comboboxIntervalRunningOperationsInThreadD.SelectedIndex = 1;
 
             FormattingDefinedOperationsInThreads();
+            ThreadsStartupOption = ThreadsStartupOption.Char;
             Cursor = Cursors.Arrow;
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            foreach (Thread thread in Threads)
+                if (thread != null && thread.IsAlive)
+                    thread.Abort();
         }
     }
 }
