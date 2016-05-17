@@ -6,171 +6,155 @@
     <members>
         <member name="T:ThreadSafeQueue.Logic.AddOperationInReportEventArgs">
             <summary>
-            
+            Аргументы события добавления сведений о выполненной операции в отчет
             </summary>
         </member>
         <member name="P:ThreadSafeQueue.Logic.AddOperationInReportEventArgs.Operation">
             <summary>
-            
+            Сведения о выполненной операции
             </summary>
         </member>
         <member name="M:ThreadSafeQueue.Logic.AddOperationInReportEventArgs.#ctor(ThreadSafeQueue.Logic.Operation)">
             <summary>
-            
+            Конструктор класса содержащий аргументы события добавления сведений о выполненной операции в отчет
             </summary>
-            <param name="operation"></param>
+            <param name="operation">Сведения о выполненной операции</param>
         </member>
         <member name="T:ThreadSafeQueue.Logic.Report">
             <summary>
-            
+            Отчет содержащий последовательность выполненных операций
             </summary>
         </member>
         <member name="F:ThreadSafeQueue.Logic.Report.operations">
             <summary>
-            
+            Последовательность выполненных операций
             </summary>
         </member>
         <member name="T:ThreadSafeQueue.Logic.Report.AddOperationInReportEventHandler">
             <summary>
-            
+            Обработчик события добавления сведений о выполненной операции в отчет
             </summary>
+            <param name="sender">Объект, к которому присоединен обработчик события</param>
+            <param name="e">Сведения об аргументах события добавления сведений о выполненной операции в отчет</param>
         </member>
         <member name="E:ThreadSafeQueue.Logic.Report.AddOperationInReport">
             <summary>
-            
+            Событие возникающее при добавлении сведений о выполненной операции в отчет
             </summary>
         </member>
-        <member name="M:ThreadSafeQueue.Logic.Report.Add(System.String,System.String,System.String)">
+        <member name="M:ThreadSafeQueue.Logic.Report.AddOperation(System.String,System.String,System.String)">
             <summary>
-            
+            Добавление сведений о выполненной операции в отчет
             </summary>
-            <param name="itemsBeforeOperation"></param>
-            <param name="name"></param>
-            <param name="itemsAfterOperation"></param>
+            <param name="itemsBeforeOperation">Сведения об элементах содержащихся до начала операции</param>
+            <param name="nameOfOperation">Наименование операции</param>
+            <param name="itemsAfterOperation">Сведения об элементах содержащихся по окончанию операции</param>
         </member>
         <member name="T:ThreadSafeQueue.Logic.Operation">
             <summary>
-            
+            Сведения о выполненной операции
             </summary>
         </member>
         <member name="P:ThreadSafeQueue.Logic.Operation.DateTime">
             <summary>
-            
+            Дата и время выполнения операции
             </summary>
         </member>
         <member name="P:ThreadSafeQueue.Logic.Operation.ItemsBeforeOperation">
             <summary>
-            
+            Сведения об элементах содержащихся до начала операции
             </summary>
         </member>
-        <member name="P:ThreadSafeQueue.Logic.Operation.Name">
+        <member name="P:ThreadSafeQueue.Logic.Operation.NameOfOperation">
             <summary>
-            
+            Наименование операции
             </summary>
         </member>
         <member name="P:ThreadSafeQueue.Logic.Operation.ItemsAfterOperation">
             <summary>
-            
+            Сведения об элементах содержащихся по окончанию операции
             </summary>
         </member>
         <member name="M:ThreadSafeQueue.Logic.Operation.#ctor(System.String,System.String,System.String)">
             <summary>
-            
+            Конструктор объекта содержащий сведения о выполненной операции
             </summary>
-            <param name="itemsBeforeOperation"></param>
-            <param name="name"></param>
-            <param name="itemsAfterOperation"></param>
+            <param name="itemsBeforeOperation">Сведения об элементах содержащихся до начала операции</param>
+            <param name="nameOfOperation">Наименование операции</param>
+            <param name="itemsAfterOperation">Сведения об элементах содержащихся по окончанию операции</param>
         </member>
         <member name="M:ThreadSafeQueue.Logic.Operation.ToString">
             <summary>
-            
+            Возвращает сведения о выполненной операции в строковом преставлении
             </summary>
-            <returns></returns>
+            <returns>Строка содержащая сведения о выполненной операции</returns>
         </member>
         <member name="T:ThreadSafeQueue.Logic.ThreadSafeQueue`1">
             <summary>
-            
+            Потокобезопасная очередь элементов ThreadSafeQueue
             </summary>
-            <typeparam name="T"></typeparam>
+            <typeparam name="T">Тип элементов в потокобезопасной очереди элементов</typeparam>
+        </member>
+        <member name="F:ThreadSafeQueue.Logic.ThreadSafeQueue`1.thisLock">
+            <summary>
+            Объект блокировки
+            </summary>
         </member>
         <member name="F:ThreadSafeQueue.Logic.ThreadSafeQueue`1.queue">
             <summary>
-            
+            Очередь элементов, основанная на принципе "первым вошел - первым вышел"
             </summary>
         </member>
         <member name="F:ThreadSafeQueue.Logic.ThreadSafeQueue`1.report">
             <summary>
-            
-            </summary>
-        </member>
-        <member name="M:ThreadSafeQueue.Logic.ThreadSafeQueue`1.#ctor">
-            <summary>
-            
+            Отчет содержащий последовательность выполненных операций
             </summary>
         </member>
         <member name="M:ThreadSafeQueue.Logic.ThreadSafeQueue`1.#ctor(ThreadSafeQueue.Logic.Report)">
             <summary>
-            
+            Конструктор потокобезопасной очереди элементов ThreadSafeQueue
             </summary>
-            <param name="report"></param>
+            <param name="report">Отчет осуществляющий формирование последовательности о выполненных операциях</param>
         </member>
         <member name="M:ThreadSafeQueue.Logic.ThreadSafeQueue`1.Push(`0)">
             <summary>
-            
+            Добавляет элемент типа T в конец коллекции потокобезопасной очереди элементов ThreadSafeQueue
             </summary>
-            <param name="item"></param>
+            <param name="item">Добавляемый элемент типа T в конец коллекции потокобезопасной очереди элементов ThreadSafeQueue</param>
         </member>
         <member name="M:ThreadSafeQueue.Logic.ThreadSafeQueue`1.Pop">
             <summary>
-            
+            Удаляет и возвращает элемент типа T, находящийся в начале потокобезопасной очереди элементов ThreadSafeQueue. В случае,
+            отсутствия элементов типа T в потокобезопасной очереди элементов ThreadSafeQueue, осуществляет ожидание добавления элемента
+            типа T в потокобезопасную очередь элементов ThreadSafeQueue.
             </summary>
-            <returns></returns>
+            <returns>Элемент типа T, находящийся в начале потокобезопасной очереди элементов ThreadSafeQueue</returns>
         </member>
         <member name="M:ThreadSafeQueue.Logic.ThreadSafeQueue`1.ToLowerFirstCharacter(System.String)">
             <summary>
-            
+            Возвращает указанное наименование потока начинающиеся с буквы в нижнем регистре
             </summary>
-            <param name="name"></param>
-            <returns></returns>
+            <param name="threadName">Наименование потока</param>
+            <returns>Наименование потока начинающиеся с буквы в нижнем регистре</returns>
         </member>
         <member name="M:ThreadSafeQueue.Logic.ThreadSafeQueue`1.GetCSharpTypeName">
             <summary>
-            
+            Возвращает псевдоним для типа T элементов содержащихся в потокобезопасной очереди элементов
             </summary>
-            <returns></returns>
+            <returns>Псевдоним для типа T элементов содержащихся в потокобезопасной очереди элементов</returns>
         </member>
         <member name="M:ThreadSafeQueue.Logic.ThreadSafeQueue`1.ToString(`0)">
             <summary>
-            
+            Возвращает строковое представление элемента типа T
             </summary>
-            <param name="item"></param>
-            <returns></returns>
+            <param name="item">Элемент типа T</param>
+            <returns>Строковое представление элемента типа T</returns>
         </member>
         <member name="M:ThreadSafeQueue.Logic.ThreadSafeQueue`1.ToString">
             <summary>
-            
+            Возвращает строкое представление элементов типа T содержащихся в потокобезопасной очереди элементов в обратном порядке
             </summary>
-            <returns></returns>
-        </member>
-        <member name="T:ThreadSafeQueue.Logic.ThreadsStartupOption">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:ThreadSafeQueue.Logic.ThreadsStartupOption.String">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:ThreadSafeQueue.Logic.ThreadsStartupOption.Integer">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:ThreadSafeQueue.Logic.ThreadsStartupOption.Char">
-            <summary>
-            
-            </summary>
+            <returns>Строковое представление элементов типа T содержащихся в потокобезопасной очереди элементов в обратном порядке</returns>
         </member>
     </members>
 </doc>

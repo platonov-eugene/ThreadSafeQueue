@@ -4,6 +4,26 @@
         <name>ThreadSafeQueue.UI</name>
     </assembly>
     <members>
+        <member name="T:ThreadSafeQueue.Logic.ThreadsStartupOption">
+            <summary>
+            Опции запуска демонстрационных потоков
+            </summary>
+        </member>
+        <member name="F:ThreadSafeQueue.Logic.ThreadsStartupOption.String">
+            <summary>
+            Запускаются демонстрационные потоки содержащие строковое операции
+            </summary>
+        </member>
+        <member name="F:ThreadSafeQueue.Logic.ThreadsStartupOption.Integer">
+            <summary>
+            Запускаются демонстрационне потоки содержащие численные (целочисленные) операции
+            </summary>
+        </member>
+        <member name="F:ThreadSafeQueue.Logic.ThreadsStartupOption.Char">
+            <summary>
+            Запускаются демонстрационные потоки содержащие символьные операции
+            </summary>
+        </member>
         <member name="T:ThreadSafeQueue.UI.App">
             <summary>
             Класс приложения Windows Presentation Foundation

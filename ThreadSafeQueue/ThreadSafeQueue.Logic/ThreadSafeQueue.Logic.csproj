@@ -43,13 +43,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddOperationInReportEventArgs.cs" />
+    <Compile Include="Report Generation\AddOperationInReportEventArgs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Report.cs" />
-    <Compile Include="Operation.cs" />
+    <Compile Include="Report Generation\Report.cs" />
+    <Compile Include="Report Generation\Operation.cs" />
     <Compile Include="ThreadSafeQueue.cs" />
-    <Compile Include="ThreadsStartupOption.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
