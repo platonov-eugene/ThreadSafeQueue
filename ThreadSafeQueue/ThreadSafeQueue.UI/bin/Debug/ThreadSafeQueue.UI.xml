@@ -11,12 +11,12 @@
         </member>
         <member name="F:ThreadSafeQueue.Logic.ThreadsStartupOption.String">
             <summary>
-            Запускаются демонстрационные потоки содержащие строковое операции
+            Запускаются демонстрационные потоки содержащие строковые операции
             </summary>
         </member>
         <member name="F:ThreadSafeQueue.Logic.ThreadsStartupOption.Integer">
             <summary>
-            Запускаются демонстрационне потоки содержащие численные (целочисленные) операции
+            Запускаются демонстрационные потоки содержащие численные (целочисленные) операции
             </summary>
         </member>
         <member name="F:ThreadSafeQueue.Logic.ThreadsStartupOption.Char">
@@ -52,12 +52,12 @@
         </member>
         <member name="P:ThreadSafeQueue.UI.MainWindow.ThreadsStartupOption">
             <summary>
-            
+            Опция запуска демонстрационных потоков
             </summary>
         </member>
         <member name="F:ThreadSafeQueue.UI.MainWindow.Threads">
             <summary>
-            
+            Демонстрационные потоки приложения
             </summary>
         </member>
         <member name="M:ThreadSafeQueue.UI.MainWindow.#ctor">
