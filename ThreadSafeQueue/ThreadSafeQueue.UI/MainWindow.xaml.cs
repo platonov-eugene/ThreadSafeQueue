@@ -1,18 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using ThreadSafeQueue.Logic;
 
 namespace ThreadSafeQueue.UI
@@ -23,14 +16,14 @@ namespace ThreadSafeQueue.UI
     public partial class MainWindow : Window
     {
         /// <summary>
-        /// 
+        /// Опция запуска демонстрационных потоков
         /// </summary>
-        public ThreadsStartupOption ThreadsStartupOption { get; private set; }
+        private ThreadsStartupOption ThreadsStartupOption { get; set; }
 
         /// <summary>
-        /// 
+        /// Демонстрационные потоки приложения
         /// </summary>
-        public Thread[] Threads = new Thread[4];
+        private Thread[] Threads = new Thread[4];
 
         /// <summary>
         /// Конструктор по умолчанию формы приложения
@@ -40,6 +33,8 @@ namespace ThreadSafeQueue.UI
             InitializeComponent();
             LoadStringOperationsInThreads(buttonLoadStringOperations, new RoutedEventArgs());
         }
+
+        #region Включение и выключение потоков
 
         private void SwitchingOnAndOffThreads(object sender, RoutedEventArgs e)
         {
@@ -78,6 +73,49 @@ namespace ThreadSafeQueue.UI
                 labelIntervalRunningOperationsInThreadD.IsEnabled = isEnabledThread;
                 comboboxIntervalRunningOperationsInThreadD.IsEnabled = isEnabledThread;
             }
+        }
+
+        #endregion
+
+        #region Запуск потоков
+
+        private void EnableAndCleanAllThreads()
+        {
+            labelHeaderThreadA.IsEnabled = true;
+            richtextboxOperationInThreadA.IsEnabled = true;
+            richtextboxOperationInThreadA.Document.Blocks.Clear();
+            labelIntervalRunningOperationsInThreadA.IsEnabled = true;
+            comboboxIntervalRunningOperationsInThreadA.IsEnabled = true;
+            comboboxIntervalRunningOperationsInThreadA.SelectedIndex = -1;
+            buttonSwitchingOnAndOffThreadA.Content = "Включен";
+            buttonSwitchingOnAndOffThreadA.Foreground = Brushes.Black;
+
+            labelHeaderThreadB.IsEnabled = true;
+            richtextboxOperationInThreadB.IsEnabled = true;
+            richtextboxOperationInThreadB.Document.Blocks.Clear();
+            labelIntervalRunningOperationsInThreadB.IsEnabled = true;
+            comboboxIntervalRunningOperationsInThreadB.IsEnabled = true;
+            comboboxIntervalRunningOperationsInThreadB.SelectedIndex = -1;
+            buttonSwitchingOnAndOffThreadB.Content = "Включен";
+            buttonSwitchingOnAndOffThreadB.Foreground = Brushes.Black;
+
+            labelHeaderThreadC.IsEnabled = true;
+            richtextboxOperationInThreadC.IsEnabled = true;
+            richtextboxOperationInThreadC.Document.Blocks.Clear();
+            labelIntervalRunningOperationsInThreadC.IsEnabled = true;
+            comboboxIntervalRunningOperationsInThreadC.IsEnabled = true;
+            comboboxIntervalRunningOperationsInThreadC.SelectedIndex = -1;
+            buttonSwitchingOnAndOffThreadC.Content = "Включен";
+            buttonSwitchingOnAndOffThreadC.Foreground = Brushes.Black;
+
+            labelHeaderThreadD.IsEnabled = true;
+            richtextboxOperationInThreadD.IsEnabled = true;
+            richtextboxOperationInThreadD.Document.Blocks.Clear();
+            labelIntervalRunningOperationsInThreadD.IsEnabled = true;
+            comboboxIntervalRunningOperationsInThreadD.IsEnabled = true;
+            comboboxIntervalRunningOperationsInThreadD.SelectedIndex = -1;
+            buttonSwitchingOnAndOffThreadD.Content = "Включен";
+            buttonSwitchingOnAndOffThreadD.Foreground = Brushes.Black;
         }
 
         private void RunThreads(object sender, RoutedEventArgs e)
@@ -126,6 +164,10 @@ namespace ThreadSafeQueue.UI
             }));
         }
 
+        #endregion
+
+        #region Запуск потоков содержащих строковые операции
+
         private void RunThreadsWithStringOperations()
         {
             foreach (Thread thread in Threads)
@@ -139,13 +181,13 @@ namespace ThreadSafeQueue.UI
 
             Thread threadA = new Thread(ThreadAWithStringOperations);
             threadA.Name = "Поток А";
-            
+
             Thread threadB = new Thread(ThreadBWithStringOperations);
             threadB.Name = "Поток B";
-            
+
             Thread threadC = new Thread(ThreadCWithStringOperations);
             threadC.Name = "Поток C";
-            
+
             Thread threadD = new Thread(ThreadDWithStringOperations);
             threadD.Name = "Поток D";
 
@@ -303,6 +345,10 @@ namespace ThreadSafeQueue.UI
             threadSafeQueue.Push("XYZ");
             Thread.Sleep(intervalRunningOperationsInThreadD);
         }
+
+        #endregion
+
+        #region Запуск потоков содержащих численные операции
 
         private void RunThreadsWithIntegerOperations()
         {
@@ -482,6 +528,10 @@ namespace ThreadSafeQueue.UI
             Thread.Sleep(intervalRunningOperationsInThreadD);
         }
 
+        #endregion
+
+        #region Запуск потоков содержащих символьные операции
+
         private void RunThreadsWithCharacterOperations()
         {
             foreach (Thread thread in Threads)
@@ -660,61 +710,9 @@ namespace ThreadSafeQueue.UI
             Thread.Sleep(intervalRunningOperationsInThreadD);
         }
 
-        private void EnableAndCleanAllThreads()
-        {
-            labelHeaderThreadA.IsEnabled = true;
-            richtextboxOperationInThreadA.IsEnabled = true;
-            richtextboxOperationInThreadA.Document.Blocks.Clear();
-            labelIntervalRunningOperationsInThreadA.IsEnabled = true;
-            comboboxIntervalRunningOperationsInThreadA.IsEnabled = true;
-            comboboxIntervalRunningOperationsInThreadA.SelectedIndex = -1;
-            buttonSwitchingOnAndOffThreadA.Content = "Включен";
-            buttonSwitchingOnAndOffThreadA.Foreground = Brushes.Black;
+        #endregion
 
-            labelHeaderThreadB.IsEnabled = true;
-            richtextboxOperationInThreadB.IsEnabled = true;
-            richtextboxOperationInThreadB.Document.Blocks.Clear();
-            labelIntervalRunningOperationsInThreadB.IsEnabled = true;
-            comboboxIntervalRunningOperationsInThreadB.IsEnabled = true;
-            comboboxIntervalRunningOperationsInThreadB.SelectedIndex = -1;
-            buttonSwitchingOnAndOffThreadB.Content = "Включен";
-            buttonSwitchingOnAndOffThreadB.Foreground = Brushes.Black;
-
-            labelHeaderThreadC.IsEnabled = true;
-            richtextboxOperationInThreadC.IsEnabled = true;
-            richtextboxOperationInThreadC.Document.Blocks.Clear();
-            labelIntervalRunningOperationsInThreadC.IsEnabled = true;
-            comboboxIntervalRunningOperationsInThreadC.IsEnabled = true;
-            comboboxIntervalRunningOperationsInThreadC.SelectedIndex = -1;
-            buttonSwitchingOnAndOffThreadC.Content = "Включен";
-            buttonSwitchingOnAndOffThreadC.Foreground = Brushes.Black;
-
-            labelHeaderThreadD.IsEnabled = true;
-            richtextboxOperationInThreadD.IsEnabled = true;
-            richtextboxOperationInThreadD.Document.Blocks.Clear();
-            labelIntervalRunningOperationsInThreadD.IsEnabled = true;
-            comboboxIntervalRunningOperationsInThreadD.IsEnabled = true;
-            comboboxIntervalRunningOperationsInThreadD.SelectedIndex = -1;
-            buttonSwitchingOnAndOffThreadD.Content = "Включен";
-            buttonSwitchingOnAndOffThreadD.Foreground = Brushes.Black;
-        }
-
-        private void FormattingDefinedOperations(RichTextBox richTextBox)
-        {
-            foreach (Paragraph paragraph in richTextBox.Document.Blocks)
-                if (new TextRange(paragraph.ContentStart, paragraph.ContentEnd).Text.Contains("Push"))
-                    paragraph.Foreground = Brushes.Green;
-                else
-                    paragraph.Foreground = Brushes.Blue;
-        }
-
-        private void FormattingDefinedOperationsInThreads()
-        {
-            FormattingDefinedOperations(richtextboxOperationInThreadA);
-            FormattingDefinedOperations(richtextboxOperationInThreadB);
-            FormattingDefinedOperations(richtextboxOperationInThreadC);
-            FormattingDefinedOperations(richtextboxOperationInThreadD);
-        }
+        #region Загрузка тестовых операций в потоки
 
         private void LoadStringOperationsInThreads(object sender, RoutedEventArgs e)
         {
@@ -866,11 +864,34 @@ namespace ThreadSafeQueue.UI
             Cursor = Cursors.Arrow;
         }
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private void FormattingDefinedOperations(RichTextBox richTextBox)
+        {
+            foreach (Paragraph paragraph in richTextBox.Document.Blocks)
+                if (new TextRange(paragraph.ContentStart, paragraph.ContentEnd).Text.Contains("Push"))
+                    paragraph.Foreground = Brushes.Green;
+                else
+                    paragraph.Foreground = Brushes.Blue;
+        }
+
+        private void FormattingDefinedOperationsInThreads()
+        {
+            FormattingDefinedOperations(richtextboxOperationInThreadA);
+            FormattingDefinedOperations(richtextboxOperationInThreadB);
+            FormattingDefinedOperations(richtextboxOperationInThreadC);
+            FormattingDefinedOperations(richtextboxOperationInThreadD);
+        }
+
+        #endregion
+
+        #region Завершение работы приложения
+
+        private void WindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             foreach (Thread thread in Threads)
                 if (thread != null && thread.IsAlive)
                     thread.Abort();
         }
+
+        #endregion
     }
 }

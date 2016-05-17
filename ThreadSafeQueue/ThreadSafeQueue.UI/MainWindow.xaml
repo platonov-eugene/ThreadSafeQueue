@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ThreadSafeQueue.UI"
         mc:Ignorable="d" Title="Потокобезопасная очередь элементов ThreadSafeQueue&lt;T&gt;" WindowStartupLocation="CenterScreen" WindowState="Maximized" Icon="Images/Logotype.png"
-        Background="#35496A" MinWidth="900" MinHeight="700" Width="900" Height="700" Closing="Window_Closing">
+        Background="#35496A" MinWidth="900" MinHeight="700" Width="900" Height="700" Closing="WindowClosing">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -54,7 +54,8 @@
                     </ComboBox.Items>
                 </ComboBox>
                 <Separator Grid.Row="6" />
-                <Button Name="buttonSwitchingOnAndOffThreadA" Grid.Row="7" Content="Включен" Padding="5" Margin="5" FontWeight="DemiBold" VerticalAlignment="Center" Foreground="Black" Click="SwitchingOnAndOffThreads" />
+                <Button Name="buttonSwitchingOnAndOffThreadA" Grid.Row="7" Content="Включен" Padding="5" Margin="5" FontWeight="DemiBold" VerticalAlignment="Center" Foreground="Black"
+                        Click="SwitchingOnAndOffThreads" />
             </Grid>
         </Border>
 
@@ -88,7 +89,8 @@
                     </ComboBox.Items>
                 </ComboBox>
                 <Separator Grid.Row="6" />
-                <Button Name="buttonSwitchingOnAndOffThreadB" Grid.Row="7" Content="Включен" Padding="5" Margin="5" FontWeight="DemiBold" VerticalAlignment="Center" Foreground="Black" Click="SwitchingOnAndOffThreads" />
+                <Button Name="buttonSwitchingOnAndOffThreadB" Grid.Row="7" Content="Включен" Padding="5" Margin="5" FontWeight="DemiBold" VerticalAlignment="Center" Foreground="Black"
+                        Click="SwitchingOnAndOffThreads" />
             </Grid>
         </Border>
 
@@ -122,7 +124,8 @@
                     </ComboBox.Items>
                 </ComboBox>
                 <Separator Grid.Row="6" />
-                <Button Name="buttonSwitchingOnAndOffThreadC" Grid.Row="7" Content="Включен" Padding="5" Margin="5" FontWeight="DemiBold" VerticalAlignment="Center" Foreground="Black" Click="SwitchingOnAndOffThreads" />
+                <Button Name="buttonSwitchingOnAndOffThreadC" Grid.Row="7" Content="Включен" Padding="5" Margin="5" FontWeight="DemiBold" VerticalAlignment="Center" Foreground="Black"
+                        Click="SwitchingOnAndOffThreads" />
             </Grid>
         </Border>
 
@@ -156,7 +159,8 @@
                     </ComboBox.Items>
                 </ComboBox>
                 <Separator Grid.Row="6" />
-                <Button Name="buttonSwitchingOnAndOffThreadD" Grid.Row="7" Content="Включен" Padding="5" Margin="5" FontWeight="DemiBold" VerticalAlignment="Center" Foreground="Black" Click="SwitchingOnAndOffThreads" />
+                <Button Name="buttonSwitchingOnAndOffThreadD" Grid.Row="7" Content="Включен" Padding="5" Margin="5" FontWeight="DemiBold" VerticalAlignment="Center" Foreground="Black"
+                        Click="SwitchingOnAndOffThreads" />
             </Grid>
         </Border>
 
